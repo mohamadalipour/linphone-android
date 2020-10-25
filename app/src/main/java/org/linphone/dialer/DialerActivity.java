@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.linphone.BuildConfig;
+import org.linphone.LinphoneContext;
 import org.linphone.LinphoneManager;
 import org.linphone.R;
 import org.linphone.activities.MainActivity;
@@ -66,6 +68,18 @@ public class DialerActivity extends MainActivity implements AddressText.AddressC
     private CoreListenerStub mListener;
     private boolean mInterfaceLoaded;
     private String mAddressToCallOnLayoutReady;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (LinphoneContext.isReady()
+                && keyCode == KeyEvent.KEYCODE_HEADSETHOOK
+                && LinphoneManager.getCallManager() != null) {
+
+            LinphoneManager.getCallManager().acceptCall(LinphoneManager.getCore().getCurrentCall());
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
