@@ -572,6 +572,14 @@ public class CallActivity extends LinphoneGenericActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (LinphoneContext.isReady()
+                && keyCode == KeyEvent.KEYCODE_HEADSETHOOK
+                && LinphoneManager.getCallManager() != null) {
+
+            LinphoneManager.getCallManager().terminateCurrentCallOrConferenceOrAll();
+        }
+
         if (mAudioManager.onKeyVolumeAdjust(keyCode)) return true;
         return super.onKeyDown(keyCode, event);
     }

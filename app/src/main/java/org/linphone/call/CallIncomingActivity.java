@@ -58,6 +58,7 @@ public class CallIncomingActivity extends LinphoneGenericActivity {
     private Call mCall;
     private CoreListenerStub mListener;
     private boolean mAlreadyAcceptedOrDeniedCall;
+
     private TextureView mVideoDisplay;
 
     @Override
@@ -200,7 +201,8 @@ public class CallIncomingActivity extends LinphoneGenericActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (LinphoneContext.isReady() && keyCode == KeyEvent.KEYCODE_HEADSETHOOK && mCall != null) {
-            mCall.accept();
+
+            answer();
         }
 
         if (LinphoneContext.isReady()
