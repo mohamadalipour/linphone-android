@@ -198,6 +198,11 @@ public class CallIncomingActivity extends LinphoneGenericActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (LinphoneContext.isReady() && keyCode == KeyEvent.KEYCODE_HEADSETHOOK && mCall != null) {
+            mCall.accept();
+        }
+
         if (LinphoneContext.isReady()
                 && (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME)
                 && mCall != null) {
